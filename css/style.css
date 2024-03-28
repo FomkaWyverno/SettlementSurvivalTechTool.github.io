@@ -9,7 +9,7 @@ html {
   -moz-user-select: none;
   -khtml-user-select: none;
   user-select: none;
-  cursor: url(/images/cursor.png), auto;
+  cursor: url(images/cursor.png), auto;
 }
 
 html, body {
@@ -95,10 +95,10 @@ td {
   transition: font-size 0.3s ease;
 }
 .container-file__label:hover {
-  cursor: url(/images/pointer.png), auto;
+  cursor: url(images/pointer.png), auto;
   font-size: 52px;
   color: #e2ecff;
-  background-image: url(/images/btn2.svg);
+  background-image: url(images/btn2.svg);
   border: solid #0057BB 3px;
   box-shadow: 0px 0px 10px 4px #0057BB;
 }
@@ -133,13 +133,13 @@ td {
   box-shadow: 0px 0px 10px 4px #0057BB;
 }
 .container-search__container-input__input:hover {
-  cursor: url(/images/pointer.png), auto;
+  cursor: url(images/pointer.png), auto;
 }
 .container-search__container-input__led-spinner {
   display: block;
   width: 62px;
   height: 62px;
-  background-image: url(/images/led_spinner.svg);
+  background-image: url(images/led_spinner.svg);
   background-size: 62px 62px;
 }
 .container-search__container-input .tableButton {
@@ -154,10 +154,10 @@ td {
   height: 100%;
 }
 .container-search__container-input .tableButton svg:hover {
-  cursor: url(/images/pointer.png), auto;
+  cursor: url(images/pointer.png), auto;
 }
 .container-search__container-input .tableButton:hover, .container-search__container-input .tableButton *:hover {
-  cursor: url(/images/pointer.png), auto;
+  cursor: url(images/pointer.png), auto;
 }
 .container-search__container-input__previousPage svg {
   transform: rotate(90deg);
