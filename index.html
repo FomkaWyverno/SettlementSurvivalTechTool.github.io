@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ua">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Play:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="icon" href="/images/icon.png">
+    <title>DetroitTechTool</title>
+</head>
+
+<body>
+    <div class="container-file">
+        <label class="container-file__label" for="detroit-json" id="detroit-json-label">
+            Вибрати JSON
+        </label>
+        <input class="container-file__input" type="file" name="detroit-json" id="detroit-json" accept=".json"
+            onchange="loadJSON(this)">
+    </div>
+
+    <div class="container-search hide">
+        <div class="container-search__container-input">
+            <input class="container-search__container-input__input" type="text" name="detroit-text" id="detroit-text" autocomplete="off">
+            <span class="container-search__container-input__led-spinner"></span>
+            <button class="container-search__container-input__previousPage tableButton"><svg xmlns="http://www.w3.org/2000/svg" id="Bold" viewBox="0 0 24 24" width="512" height="512"><path d="M12,24a1.493,1.493,0,0,1-1.06-.439L3.264,15.889a5.5,5.5,0,0,1,0-7.778L10.936.439a1.5,1.5,0,1,1,2.121,2.122L5.385,10.232a2.5,2.5,0,0,0,0,3.536l7.672,7.671A1.5,1.5,0,0,1,12,24Z"/><path d="M21.542,24a1.5,1.5,0,0,1-1.061-.439L11.4,14.475a3.505,3.505,0,0,1,0-4.95L20.481.439A1.5,1.5,0,0,1,22.6,2.561l-9.086,9.085a.5.5,0,0,0,0,.708L22.6,21.439A1.5,1.5,0,0,1,21.542,24Z"/></svg></button>
+            <button class="container-search__container-input__nextPage tableButton"><svg xmlns="http://www.w3.org/2000/svg" id="Bold" viewBox="0 0 24 24" width="512" height="512"><path d="M12,24a1.493,1.493,0,0,1-1.06-.439L3.264,15.889a5.5,5.5,0,0,1,0-7.778L10.936.439a1.5,1.5,0,1,1,2.121,2.122L5.385,10.232a2.5,2.5,0,0,0,0,3.536l7.672,7.671A1.5,1.5,0,0,1,12,24Z"/><path d="M21.542,24a1.5,1.5,0,0,1-1.061-.439L11.4,14.475a3.505,3.505,0,0,1,0-4.95L20.481.439A1.5,1.5,0,0,1,22.6,2.561l-9.086,9.085a.5.5,0,0,0,0,.708L22.6,21.439A1.5,1.5,0,0,1,21.542,24Z"/></svg></button>
+            <div class="container-search__container-input__counter">
+                <span>Page: </span><span><span class="container-search__container-input__counter__page"></span>
+            </div>
+        </div>
+        <div class="container-search__table-container">
+            <table class="table-json">
+                <thead>
+                    <tr>
+                        <th class="table-json__container-id" scope="col">ContainerID</th>
+                        <th class="table-json__key" scope="col">Key</th>
+                        <th class="table-json__game-text" scope="col">Game-Text</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <audio id="selectSound" src="/audio/select.ogg"></audio>
+    <audio id="openSound" src="/audio/open.ogg"></audio>
+    <script src="scripts/script.js"></script>
+    <script src="scripts/sound.js"></script>
+</body>
+</html>
