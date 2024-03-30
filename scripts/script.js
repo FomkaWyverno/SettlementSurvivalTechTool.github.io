@@ -66,7 +66,7 @@ function afterLoadJSON() {
         select.addEventListener('click', () => {
             setTimeout(() => {
                 contentFilter.classList.add('hide-content');
-            }, 700);
+            }, 200);
         });
     });
     filterInputs.forEach(input => {input.addEventListener('change', () => {pagesFilter(inputFilter.value.toLowerCase())})})
@@ -208,26 +208,36 @@ class KeyTranslate {
                 }
             } else { // Якщо це не перший елемент массива
                 if (arrayText[i].constructor === Preffix) { // Якщо це Префікс
-                    if (i + 2 < arrayText.length) { // Перевіряємо чи є елемент після тексту?
-                        if (arrayText[i+2].constructor === Suffix) { // Якщо позад тексту стоїть суффікс
+                    if (i+2 < arrayText.length) { // Перевіряємо чи массив більший ніж індекс + 2
+                        if (arrayText[i+2].constructor !== Suffix) { // Якщо через два пункта не є суффікс
                             if (this.hasVoice) {
-                                copyText += `\t\t\t${arrayText[i].preffix}\t${arrayText[i+2].suffix}\t\t\t${arrayText[i+1]}\n`;
+                                copyText += `\t\t\t${arrayText[i].preffix}\t\t\t\t${arrayText[i + 1]}\n`;
+                                i++; // Зберігаємо просто з префіксом
+                            } else {
+                                copyText += `\t\t\t${arrayText[i].preffix}\t\t\t${arrayText[i + 1]}\n`;
+                                i++; // Зберігаємо просто з префіксом
+                            }  
+                        } else if (arrayText[i+2].constructor === Suffix) { // Якщо це суффікс
+                            if (this.hasVoice) {
+                                copyText += `\t\t\t${arrayText[i].preffix}\t${arrayText[i + 2].suffix}\t\t\t${arrayText[i + 1]}\n`;
                                 i = i + 2; // Записуємо звичайний текст з префіксом та суфіксом
                             } else {
-                                copyText += `\t\t\t${arrayText[i].preffix}\t${arrayText[i+2].suffix}\t\t${arrayText[i+1]}\n`;
+                                copyText += `\t\t\t${arrayText[i].preffix}\t${arrayText[i + 2].suffix}\t\t${arrayText[i + 1]}\n`;
                                 i = i + 2; // Записуємо звичайний текст з префіксом та суфіксом
                             }
-                            
+                        } else {
+                            console.err("СТАЛАСЯ ПОМИЛКА! array[i+2] - НЕ Є СУФФІКСОМ Й НЕ Є ПРЕФІКСОМ!");
+                            console.log(arrayText);
+                            console.log('copyTEXT: '+copyText);
                         }
                     } else {
                         if (this.hasVoice) {
-                            copyText += `\t\t\t${arrayText[i].preffix}\t\t\t\t${arrayText[i+1]}\n`; 
+                            copyText += `\t\t\t${arrayText[i].preffix}\t\t\t\t${arrayText[i + 1]}\n`;
                             i++; // Зберігаємо просто з префіксом
                         } else {
-                            copyText += `\t\t\t${arrayText[i].preffix}\t\t\t${arrayText[i+1]}\n`; 
+                            copyText += `\t\t\t${arrayText[i].preffix}\t\t\t${arrayText[i + 1]}\n`;
                             i++; // Зберігаємо просто з префіксом
                         }
-                        
                     }
                 }
             }
