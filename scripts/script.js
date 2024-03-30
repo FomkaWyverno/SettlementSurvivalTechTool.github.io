@@ -224,7 +224,7 @@ class KeyTranslate {
                             copyText = `${this.id}\t=COUNTIFS(C:C;C:C; A:A; A:A)\t${this.key}\t${arrayText[i].preffix}\t\t${this.text}\t${actor}\t${arrayText[i+1]}\t\t\t${context}\t${timing}\n`;
                             i++; // Якщо це репліка
                         } else {
-                            copyText = `${this.id}\t=COUNTIFS(C:C;C:C; A:A; A:A)\t${this.key}\t${arrayText[i].preffix}\t\t${this.text}\t${arrayText[i+1]}\n`;
+                            copyText = `${this.id}\t=COUNTIFS(C:C;C:C; A:A; A:A)\t${this.key}\t${arrayText[i].preffix}\t\t${this.text}\t${arrayText[i+1]}\t\t\t${context}\t${timing}\n`;
                             i++; // Якщо є наступний елемент, то це значить що після префіксу є текст, зберігаємо як перший рядок
                         }
                     }
