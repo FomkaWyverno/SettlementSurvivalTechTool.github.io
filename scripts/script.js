@@ -71,7 +71,7 @@ function afterLoadJSON() {
             }, 200);
         });
     });
-    filterInputs.forEach(input => {input.addEventListener('change', () => {pagesFilter(inputFilter.value.toLowerCase())})});
+    filterInputs.forEach(input => {input.addEventListener('change', () => {runPagesFilter(inputFilter.value.toLowerCase())})});
 
     tableHeadKey.addEventListener('click', () => {
         if (!tableHeadKey.classList.contains('table-json__head__select')) {
