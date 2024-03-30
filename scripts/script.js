@@ -118,8 +118,6 @@ informationButton.addEventListener('click', () => {
     informationKeyBlock.classList.add('behindScreen');
 
     actorInput.value = '';
-    contextInput.value = '';
-    timingInput.value = '';
 });
 
 class KeyTranslate {
