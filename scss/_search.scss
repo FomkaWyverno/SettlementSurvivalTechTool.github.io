@@ -130,7 +130,7 @@
 
     th,
     td {
-        border: 2px solid rgb(221, 39, 39);
+        border-top: 2px solid #4b4b4b;
         text-align: center;
         padding: 4px 8px 4px 8px;
     }
@@ -143,6 +143,7 @@
     &__container-id {
         width: 120px;
         max-width: 120px;
+        border-right: 2px solid #4b4b4b;
     }
 
     &__key {
@@ -150,6 +151,7 @@
         max-width: 500px;
         text-overflow: ellipsis;
         overflow: hidden;
+        border-right: 2px solid #4b4b4b;
     }
 
     &__game-text {
@@ -175,6 +177,29 @@
                 box-shadow: 0px 0px 8px 2px $color-btn-txt;
             }
         }
+    }
+
+    &__head {
+        user-select: none;
+        transition: background-color .5s ease;
+        &:hover {
+            cursor: $cursor_pointer;
+        }
+
+        &__select {
+            background-color: #57daf1;
+        }
+    }
+
+    .table-json__head {
+        border: none;
+        border-bottom: 2px solid #e0e0e0;
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+    }
+
+    thead .table-json__container-id, .table-json__key {
+        border-right: 2px solid #4b4b4b;
     }
 
 }

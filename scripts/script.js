@@ -36,6 +36,9 @@ function afterLoadJSON() {
     const filterSelects = document.querySelectorAll('.container-filter__content__select__label');
     const filterInputs = document.querySelectorAll('.container-filter__content__select__radio');
 
+    const tableHeadText = document.querySelector('#table-json__head--text');
+    const tableHeadKey = document.querySelector('#table-json__head--key');
+
     const filterContains = document.querySelector('#filter-contains');
     const filterStart = document.querySelector('#filter-start');
     const filterEnd = document.querySelector('#filter-end');
@@ -54,8 +57,7 @@ function afterLoadJSON() {
     });
 
     inputFilter.addEventListener('input', () => {
-        const value = inputFilter.value.toLowerCase();
-        pagesFilter(value);
+        runPagesFilter();
     });
 
     buttonFilter.addEventListener('click', () => {
@@ -69,23 +71,52 @@ function afterLoadJSON() {
             }, 200);
         });
     });
-    filterInputs.forEach(input => {input.addEventListener('change', () => {pagesFilter(inputFilter.value.toLowerCase())})})
+    filterInputs.forEach(input => {input.addEventListener('change', () => {pagesFilter(inputFilter.value.toLowerCase())})});
 
-    function pagesFilter(input) {
-        const value = input.toLowerCase();
-        console.log(`InputFilter: ${value}`);
-        pages.filter((key) => {
-            if (filterStart.checked) {
-                return key.text.toLowerCase().startsWith(value);
-            } else if (filterEnd.checked) {
-                return key.text.toLowerCase().endsWith(value);
-            } else if (filterEquals.checked) {
-                return key.text.toLowerCase() === value;
-            } else {
-               return key.text.toLowerCase().includes(value); 
-            }
-            
-        });
+    tableHeadKey.addEventListener('click', () => {
+        if (!tableHeadKey.classList.contains('table-json__head__select')) {
+            tableHeadKey.classList.add('table-json__head__select');
+            tableHeadText.classList.remove('table-json__head__select');
+            runPagesFilter();
+        }
+    });
+    tableHeadText.addEventListener('click', () => {
+        if (!tableHeadText.classList.contains('table-json__head__select')) {
+            tableHeadText.classList.add('table-json__head__select');
+            tableHeadKey.classList.remove('table-json__head__select');
+            runPagesFilter();
+        }
+    });
+
+    function runPagesFilter() {
+        let input = inputFilter.value.toLowerCase();
+        let compare;
+        hasValue = false;
+        if (tableHeadText.classList.contains('table-json__head__select')) {
+            compare = 'text';
+            hasValue = true;
+        } else if (tableHeadKey.classList.contains('table-json__head__select')) {
+            compare = 'key';
+            hasValue = true;
+        } else {
+            console.error("AN ERROR OCCURRED NO TABLE HEADER IS SELECTED TO SEARCH! NO table-json__head--text NO table-json__head--key!");
+        }
+        
+        if (hasValue) {
+            console.log(`InputFilter: ${input}`);
+            pages.filter((key) => {
+                if (filterStart.checked) {
+                    return key[compare].toLowerCase().startsWith(input);
+                } else if (filterEnd.checked) {
+                    return key[compare].toLowerCase().endsWith(input);
+                } else if (filterEquals.checked) {
+                    return key[compare].toLowerCase() === input;
+                } else {
+                    return key[compare].toLowerCase().includes(input);
+                }
+
+            });
+        }
     }
 }
 
