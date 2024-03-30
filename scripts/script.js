@@ -221,18 +221,22 @@ class KeyTranslate {
                 if (arrayText[i].constructor === Preffix) { // Перевіряємо чи перший елемент це префікс
                     if (i+1 !== arrayText.length) { // Чи є наступний елемент після префікса?
                         if (this.hasVoice) {
-                            copyText = `${this.id}\t=COUNTIFS(C:C;C:C; A:A; A:A)\t${this.key}\t${arrayText[i].preffix}\t\t${this.text}\t${actor}\t${arrayText[i+1]}\t\t\t${context}\t${timing}\n`;
+                            copyText = 
+`${escapeMetaSymbols(this.id)}\t=COUNTIFS(C:C;C:C; A:A; A:A)\t${escapeMetaSymbols(this.key)}\t${escapeMetaSymbols(arrayText[i].preffix)}\t\t${escapeMetaSymbols(this.text)}\t${escapeMetaSymbols(actor)}\t${escapeMetaSymbols(arrayText[i+1])}\t\t\t${escapeMetaSymbols(context)}\t${escapeMetaSymbols(timing)}\n`;
                             i++; // Якщо це репліка
                         } else {
-                            copyText = `${this.id}\t=COUNTIFS(C:C;C:C; A:A; A:A)\t${this.key}\t${arrayText[i].preffix}\t\t${this.text}\t${arrayText[i+1]}\t\t\t${context}\t${timing}\n`;
+                            copyText =
+`${escapeMetaSymbols(this.id)}\t=COUNTIFS(C:C;C:C; A:A; A:A)\t${escapeMetaSymbols(this.key)}\t${escapeMetaSymbols(arrayText[i].preffix)}\t\t${escapeMetaSymbols(this.text)}\t${escapeMetaSymbols(arrayText[i+1])}\t\t\t${escapeMetaSymbols(context)}\t${escapeMetaSymbols(timing)}\n`;
                             i++; // Якщо є наступний елемент, то це значить що після префіксу є текст, зберігаємо як перший рядок
                         }
                     }
                 } else { // Якщо це не префікст тоді це текст - збергіаємо як перший рядок
                     if (this.hasVoice) {
-                        copyText = `${this.id}\t=COUNTIFS(C:C;C:C; A:A; A:A)\t${this.key}\t\t\t${this.text}\t${actor}\t${arrayText[i]}\t\t\t${context}\t${timing}\n`;
+                        copyText = 
+`${escapeMetaSymbols(this.id)}\t=COUNTIFS(C:C;C:C; A:A; A:A)\t${escapeMetaSymbols(this.key)}\t\t\t${escapeMetaSymbols(this.text)}\t${escapeMetaSymbols(actor)}\t${escapeMetaSymbols(arrayText[i])}\t\t\t${escapeMetaSymbols(context)}\t${escapeMetaSymbols(timing)}\n`;
                     } else {
-                        copyText = `${this.id}\t=COUNTIFS(C:C;C:C; A:A; A:A)\t${this.key}\t\t\t${this.text}\t${arrayText[i]}\t\t\t${context}\t${timing}\n`;
+                        copyText = 
+`${escapeMetaSymbols(this.id)}\t=COUNTIFS(C:C;C:C; A:A; A:A)\t${escapeMetaSymbols(this.key)}\t\t\t${escapeMetaSymbols(this.text)}\t${escapeMetaSymbols(escapeMetaSymbols(arrayText[i]))}\t\t\t${escapeMetaSymbols(context)}\t${escapeMetaSymbols(timing)}\n`;
                     }
                 }
             } else { // Якщо це не перший елемент массива
@@ -240,18 +244,21 @@ class KeyTranslate {
                     if (i+2 < arrayText.length) { // Перевіряємо чи массив більший ніж індекс + 2
                         if (arrayText[i+2].constructor !== Suffix) { // Якщо через два пункта не є суффікс
                             if (this.hasVoice) {
-                                copyText += `\t\t\t${arrayText[i].preffix}\t\t\t\t${arrayText[i + 1]}\n`;
+                                copyText += 
+`\t\t\t${escapeMetaSymbols(arrayText[i].preffix)}\t\t\t\t${escapeMetaSymbols(arrayText[i + 1])}\n`;
                                 i++; // Зберігаємо просто з префіксом
                             } else {
-                                copyText += `\t\t\t${arrayText[i].preffix}\t\t\t${arrayText[i + 1]}\n`;
+                                copyText += 
+`\t\t\t${escapeMetaSymbols(arrayText[i].preffix)}\t\t\t${escapeMetaSymbols(arrayText[i + 1])}\n`;
                                 i++; // Зберігаємо просто з префіксом
                             }  
                         } else if (arrayText[i+2].constructor === Suffix) { // Якщо це суффікс
                             if (this.hasVoice) {
-                                copyText += `\t\t\t${arrayText[i].preffix}\t${arrayText[i + 2].suffix}\t\t\t${arrayText[i + 1]}\n`;
+                                copyText += 
+`\t\t\t${escapeMetaSymbols(arrayText[i].preffix)}\t${escapeMetaSymbols(arrayText[i + 2].suffix)}\t\t\t${escapeMetaSymbols(arrayText[i + 1])}\n`;
                                 i = i + 2; // Записуємо звичайний текст з префіксом та суфіксом
                             } else {
-                                copyText += `\t\t\t${arrayText[i].preffix}\t${arrayText[i + 2].suffix}\t\t${arrayText[i + 1]}\n`;
+                                copyText += `\t\t\t${escapeMetaSymbols(arrayText[i].preffix)}\t${escapeMetaSymbols(arrayText[i + 2].suffix)}\t\t${escapeMetaSymbols(arrayText[i + 1])}\n`;
                                 i = i + 2; // Записуємо звичайний текст з префіксом та суфіксом
                             }
                         } else {
@@ -261,10 +268,12 @@ class KeyTranslate {
                         }
                     } else {
                         if (this.hasVoice) {
-                            copyText += `\t\t\t${arrayText[i].preffix}\t\t\t\t${arrayText[i + 1]}\n`;
+                            copyText += 
+`\t\t\t${escapeMetaSymbols(arrayText[i].preffix)}\t\t\t\t${escapeMetaSymbols(arrayText[i + 1])}\n`;
                             i++; // Зберігаємо просто з префіксом
                         } else {
-                            copyText += `\t\t\t${arrayText[i].preffix}\t\t\t${arrayText[i + 1]}\n`;
+                            copyText += 
+`\t\t\t${escapeMetaSymbols(arrayText[i].preffix)}\t\t\t${escapeMetaSymbols(arrayText[i + 1])}\n`;
                             i++; // Зберігаємо просто з префіксом
                         }
                     }
@@ -272,7 +281,7 @@ class KeyTranslate {
             }
         }
 
-
+        console.log(copyText);
         
         navigator.clipboard.writeText(copyText)
             .then(() => {
@@ -281,6 +290,14 @@ class KeyTranslate {
             .catch(err => {
                 console.error('An error occurred while writing to the clipboard: ', err);
             });
+
+
+        function escapeMetaSymbols(text) {
+            text = text.replaceAll('\r', '\\r');
+            text = text.replaceAll('\n', '\\n');
+            text = text.replaceAll('\t', '\\t');
+            return text;
+        } 
     }
 
     escapeHtml(text) {
