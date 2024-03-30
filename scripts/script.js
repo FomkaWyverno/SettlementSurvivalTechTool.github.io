@@ -230,9 +230,9 @@ class KeyTranslate {
                     }
                 } else { // Якщо це не префікст тоді це текст - збергіаємо як перший рядок
                     if (this.hasVoice) {
-                        copyText = `${this.id}\t=COUNTIFS(C:C;C:C; A:A; A:A)\t${this.key}\t\t\t${this.text}\t${actor}\t${arrayText[i]}\n`;
+                        copyText = `${this.id}\t=COUNTIFS(C:C;C:C; A:A; A:A)\t${this.key}\t\t\t${this.text}\t${actor}\t${arrayText[i]}\t\t\t${context}\t${timing}\n`;
                     } else {
-                        copyText = `${this.id}\t=COUNTIFS(C:C;C:C; A:A; A:A)\t${this.key}\t\t\t${this.text}\t${arrayText[i]}\n`;
+                        copyText = `${this.id}\t=COUNTIFS(C:C;C:C; A:A; A:A)\t${this.key}\t\t\t${this.text}\t${arrayText[i]}\t\t\t${context}\t${timing}\n`;
                     }
                 }
             } else { // Якщо це не перший елемент массива
