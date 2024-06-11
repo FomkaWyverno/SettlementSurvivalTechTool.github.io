@@ -69,38 +69,26 @@ td {
   padding: 0;
 }
 
-.container-file {
+.container-loader {
   height: 100%;
   width: 100%;
   display: flex;
   align-items: center;
+  flex-direction: column;
   justify-content: center;
 }
-.container-file__input {
-  width: 0.1px;
-  height: 0.1px;
-  opacity: 0;
-  overflow: hidden;
-  position: absolute;
-  z-index: -1;
+.container-loader__loader {
+  display: block;
+  width: 256px;
+  height: 256px;
+  content: "";
+  background-image: url("/images/led_spinner.svg");
+  background-size: 256px 256px;
 }
-.container-file__label {
-  padding: 8px 16px 8px 16px;
-  font-family: "Play", sans-serif;
-  font-weight: 400;
-  font-size: 42px;
-  border-radius: 8px;
-  background-color: #fff;
-  color: #0057BB;
-  transition: font-size 0.3s ease;
-}
-.container-file__label:hover {
-  cursor: url(../images/pointer.png), auto;
-  font-size: 48px;
-  color: #e2ecff;
-  background-image: url(../images/btn2.svg);
-  border: solid #0057BB 3px;
-  box-shadow: 0px 0px 10px 4px #0057BB;
+.container-loader__load-text {
+  color: white;
+  font-family: "Play" sans-serif;
+  font-size: 22px;
 }
 
 .container-search {
@@ -211,6 +199,11 @@ td {
 .table-json tbody td {
   font-size: 14px;
 }
+.table-json__code {
+  width: 52px;
+  max-width: 52px;
+  border-right: 2px solid #4b4b4b;
+}
 .table-json__container-id {
   width: 120px;
   max-width: 120px;
@@ -262,7 +255,7 @@ td {
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
 }
-.table-json thead .table-json__container-id, .table-json .table-json__key {
+.table-json thead .table-json__code, .table-json .table-json__container-id, .table-json .table-json__key {
   border-right: 2px solid #4b4b4b;
 }
 

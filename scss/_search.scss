@@ -140,6 +140,12 @@
         font-size: 14px;
     }
 
+    &__code {
+        width: 52px;
+        max-width: 52px;
+        border-right: 2px solid #4b4b4b;
+    }
+
     &__container-id {
         width: 120px;
         max-width: 120px;
@@ -198,7 +204,7 @@
         border-top-right-radius: 8px;
     }
 
-    thead .table-json__container-id, .table-json__key {
+    thead .table-json__code, .table-json__container-id, .table-json__key {
         border-right: 2px solid #4b4b4b;
     }
 

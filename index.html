@@ -13,12 +13,9 @@
 </head>
 
 <body>
-    <div class="container-file">
-        <label class="container-file__label" for="detroit-json" id="detroit-json-label">
-            Вибрати JSON
-        </label>
-        <input class="container-file__input" type="file" name="detroit-json" id="detroit-json" accept=".json"
-            onchange="loadJSON(this)">
+    <div class="container-loader">
+        <span class="container-loader__loader"></span>
+        <span class="container-loader__load-text">Loading JSON...</span>
     </div>
 
     <div class="container-search hide">
@@ -67,6 +64,7 @@
             <table class="table-json">
                 <thead>
                     <tr>
+                        <th class="table-json__code table-json__head" id="table-json__head--code" scope="col">Code</th>
                         <th class="table-json__container-id table-json__head" scope="col">ContainerID</th>
                         <th class="table-json__key table-json__head" id="table-json__head--key" scope="col">Key</th>
                         <th class="table-json__game-text table-json__head table-json__head__select" id="table-json__head--text" scope="col">Game-Text</th>
@@ -99,6 +97,9 @@
     </div>
     <audio id="selectSound" src="audio/select.ogg"></audio>
     <audio id="openSound" src="audio/open.ogg"></audio>
+    <script src="scripts/detroit-json.js"></script>
+    <script src="scripts/KeyTranslate.js"></script>
+    <script src="scripts/Pages.js"></script>
     <script src="scripts/parseToTable.js"></script>
     <script src="scripts/script.js"></script>
     <script src="scripts/sound.js"></script>
