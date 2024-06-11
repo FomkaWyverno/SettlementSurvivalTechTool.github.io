@@ -82,7 +82,7 @@ td {
   width: 256px;
   height: 256px;
   content: "";
-  background-image: url("/images/led_spinner.svg");
+  background-image: url(../images/led_spinner.svg);
   background-size: 256px 256px;
 }
 .container-loader__load-text {
