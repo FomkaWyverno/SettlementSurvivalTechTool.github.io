@@ -5,6 +5,7 @@ class KeyTranslate {
         this.key = key;
         this.hasVoice = hasVoice;
 
+        text = this.escapeMetaSymbols(text);
         let groupText = pattern.exec(text);
 
         this.code = groupText[1];
@@ -170,5 +171,12 @@ class KeyTranslate {
         });
     }
 
-
+    escapeMetaSymbols(text) { // Екранація метасимволів
+        let metasymbols = {
+            "\n": "\\n",
+            "\r": "\\r"
+        };
+        
+        return text.replace(/[\r\n]/g, function(match) { return metasymbols[match]; });
+    }
 }

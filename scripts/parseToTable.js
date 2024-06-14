@@ -13,7 +13,7 @@ class Suffix {
 function parseToTable(originalText) {
 
 
-    let regex = '{[^{}]+?}|<[^<>]+?>';
+    let regex = /{[^{}]+?}|<[^<>]+?>|\\r|\\n/g;
     let tags = originalText.matchAll(regex);
 
     let arrayTag = new Array();
