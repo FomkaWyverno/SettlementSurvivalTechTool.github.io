@@ -151,3 +151,46 @@ informationButton.addEventListener('click', () => {
 
     actorInput.value = '';
 });
+
+contextInput.addEventListener('input', () => {
+    
+    try {
+        const decodeURL = decodeURIComponent(contextInput.value); // Декодуємо URL
+        console.log(decodeURL)
+        const url = new URL(decodeURL); // Створюємо об'єкт URL з декодованого рядка
+        const contextValue = new URLSearchParams(url.search) // Створюємо обєкт для пошуку параметрів в посиланні
+
+        if (contextValue.has('t')) {
+            const timing = contextValue.get('t');
+            console.log(`URL Timing: ${timing}`);
+            const fTiming = formatTiming(timing);
+            console.log(`Format Timing: ${fTiming}`);
+            timingInput.value = fTiming;
+
+        }
+    } catch (errors) {
+        console.log(errors)
+        console.log('Invalid URL or input, ignoring:', contextInput.value);
+    }
+    
+});
+
+function formatTiming(timingSecond) {
+    let hours = undefined;
+    let minutes = Math.floor(timingSecond / 60);
+    let seconds = Math.floor(timingSecond % 60);
+
+    if (minutes > 59) {
+        let timingMinutes = minutes;
+        hours = Math.floor(timingMinutes / 60);
+        minutes = Math.floor(timingMinutes % 60);
+        seconds = Math.floor(timingSecond - (timingMinutes * 60));
+    }
+    if (minutes.toString().length == 1) minutes = '0'+minutes;
+    if (seconds.toString().length == 1) seconds = '0'+seconds;
+    if (hours != undefined) {
+        return `${hours}:${minutes}:${seconds}`
+    } else {
+        return `${minutes}:${seconds}`
+    }
+}
