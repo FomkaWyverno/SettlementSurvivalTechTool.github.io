@@ -1,0 +1,60 @@
+.common-names {
+    position: absolute;
+    transform: translate(250px, -130px);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #2b2b2b;
+    color: white;
+    font-family: "Play", sans-serif;
+    border: 2px #5de458 solid;
+    border-radius: 8px;
+    box-shadow: 0px 0px 8px 0px #5de458;
+
+    padding: 24px 16px 24px 16px;
+
+    width: 300px;
+    max-width: 300px;
+    transition: .5s ease;
+
+    h3 {
+        font-size: 18px;
+        margin-bottom: 12px;
+    }
+
+    &__characters {
+        font-size: 14px;
+        font-weight: 700;
+    }
+
+    &__code {
+        margin-bottom: 8px;
+    }
+
+    &__element {
+        display: flex;
+        justify-content: space-between;
+        width: 200px;
+
+        &:not(:last-child) {
+            margin-bottom: 5px;
+        }
+        &__button {
+            color: $color-btn-txt;
+            border: 2px solid $color-btn-txt;
+            border-radius: 4px;
+            background-color: white;
+
+            &:hover {
+                cursor: $cursor_pointer;
+                color: $color-btn-txt-hv;
+                background-image: url(../images/btn2.svg);
+            }
+        }
+    }
+}
+
+.behindScreen-right {
+    transform: translate(1400px, -130px);
+}

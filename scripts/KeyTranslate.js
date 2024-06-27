@@ -1,4 +1,6 @@
-const pattern = /^!(.+?)! (.+)?/
+const patternCode = /^!(.+?)! (.+)?/
+const patternVoiceKey = /.+?_.+?_.+?_.+?_(.+?)_.+/;
+
 class KeyTranslate {
     constructor(id, key, text, hasVoice) {
         this.id = id;
@@ -6,10 +8,15 @@ class KeyTranslate {
         this.hasVoice = hasVoice;
 
         text = this.escapeMetaSymbols(text);
-        let groupText = pattern.exec(text);
+        let groupText = patternCode.exec(text);
 
         this.code = groupText[1];
         this.text = groupText[2];
+
+        if (this.hasVoice) { // Якщо це ключ репліки
+            let groupCharacter = patternVoiceKey.exec(this.key);
+            this.characterCode = groupCharacter[1];
+        }
         
         if (this.text == null || this.text == undefined) this.text = '';
 
@@ -55,11 +62,50 @@ class KeyTranslate {
             openSound.play();
             keyTranslate = this;
             if (this.hasVoice) { // Якщо є репліка
+                commonNamesList.innerHTML = '';
+
+                const jsonListCharacters = localStorage.getItem(this.characterCode);
+                if (jsonListCharacters) {
+                    const listCharacters = JSON.parse(jsonListCharacters);
+                    listCharacters.forEach(characher => {
+                        const liElement = document.createElement('li');
+                        const textElement = document.createElement('span');
+                        const buttonDeleteElement = document.createElement('button');
+
+                        textElement.innerHTML = characher;
+                        buttonDeleteElement.innerHTML = 'Видалити';
+
+                        liElement.appendChild(textElement);
+                        liElement.appendChild(buttonDeleteElement);
+
+                        liElement.classList.add('common-names__element');
+                        textElement.classList.add('common-names__element__text');
+                        buttonDeleteElement.classList.add('common-names__element__button');
+
+                        buttonDeleteElement.addEventListener('mouseover', () => {
+                            selectSound.currentTime = 0;
+                            selectSound.play();
+                        });
+                        buttonDeleteElement.addEventListener('click', () => {
+                            openSound.currentTime = 0;
+                            openSound.play();
+                        }) 
+                        
+                        commonNamesList.appendChild(liElement); 
+                    });
+                } else {
+                    commonNamesList.innerHTML = '<li>В словнику не було знайдено!<li/>'
+                }
+
                 containerActorInput.classList.remove('hide'); // Відображаємо поле для актора
+                commonNames.classList.remove('behindScreen-right'); // Відкриваємо список часто вживаємих імен для цього коду персонажу
+                commonNamesCodeCharacter.innerHTML = this.characterCode; // Встановлюємо код персонажа
+
+                
             } else { // Якщо немає репліки
                 containerActorInput.classList.add('hide'); // Скриваємо поле для актора
             }
-            informationKeyBlock.classList.remove('behindScreen');
+            informationKeyBlock.classList.remove('behindScreen-bottom');
         });
 
         this.html = trTag;
@@ -72,6 +118,11 @@ class KeyTranslate {
 
     writeToClipboardCopyText(actor, context, timing) {
         const arrayText = parseToTable(this.text);
+
+        if (this.hasVoice) {
+            console.log(this);
+            saveCharacterNameInLocalStorage(actor, this.characterCode);
+        }
 
         let copyText = '';
         for (let i = 0; i < arrayText.length; i++) { // Проходимся по всім елементам
@@ -155,6 +206,21 @@ class KeyTranslate {
             text = text.replaceAll('\n', '\\n');
             text = text.replaceAll('\t', '\\t');
             return text;
+        }
+
+
+        function saveCharacterNameInLocalStorage(actorRole, characterCode) {
+            const jsonListCharacters = localStorage.getItem(characterCode);
+            let listCharacters;
+            if (jsonListCharacters) {
+                listCharacters = JSON.parse(jsonListCharacters);
+            } else {
+                listCharacters = [];
+            }
+
+            listCharacters.push(actorRole);
+
+            localStorage.setItem(characterCode, JSON.stringify(listCharacters));
         }
     }
 

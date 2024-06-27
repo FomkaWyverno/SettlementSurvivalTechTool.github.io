@@ -134,6 +134,9 @@ function parseJsonToArrayKeys(json) {
 }
 
 const informationKeyBlock = document.querySelector('.containter-information-key');
+const commonNames = document.querySelector('.common-names');
+const commonNamesCodeCharacter = document.querySelector('.common-names__characters');
+const commonNamesList = document.querySelector('.common-names__list');
 const containerActorInput = document.querySelector('#container-actor-input');
 const actorInput = document.querySelector('#actor-input');
 const contextInput = document.querySelector('#context-input');
@@ -147,7 +150,8 @@ informationButton.addEventListener('click', () => {
     const timing = timingInput.value;
 
     keyTranslate.writeToClipboardCopyText(actor, context, timing);
-    informationKeyBlock.classList.add('behindScreen');
+    informationKeyBlock.classList.add('behindScreen-bottom');
+    commonNames.classList.add('behindScreen-right');
 
     actorInput.value = '';
 });
