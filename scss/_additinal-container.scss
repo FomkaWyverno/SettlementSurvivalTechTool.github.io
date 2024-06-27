@@ -1,0 +1,10 @@
+.containter-additinal {
+    position: absolute;
+    display: flex;
+    border-radius: 16px;
+    background-color: $color-background;
+    border: 2px solid $color-border-backrgound;
+    color: white;
+
+    max-width: 600px;
+}

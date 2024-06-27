@@ -75,36 +75,36 @@
             </table>
         </div>
 
-        <div class="containter-information-key behindScreen-bottom">
-            <h3>Додаткова інформація</h3>
-            <div class="containter-information-key__container-input" id="container-actor-input">
-                <label for="actor-input" class="containter-information-key__container-input__label">Актор</label>
-                <input type="text" name="actor-input" id="actor-input"
-                    class="containter-information-key__container-input__input">
+        <div class="containter-additinal">
+            <div class="information-key">
+                <h3>Додаткова інформація</h3>
+                <div class="information-key__container-input" id="container-actor-input">
+                    <label for="actor-input" class="information-key__container-input__label">Актор</label>
+                    <input type="text" name="actor-input" id="actor-input" class="information-key__container-input__input">
+                </div>
+                <div class="information-key__container-input">
+                    <label for="context-input" class="information-key__container-input__label">Контекст</label>
+                    <input type="text" name="context-input" id="context-input" autocomplete="off"
+                        class="information-key__container-input__input">
+                </div>
+                <div class="information-key__container-input">
+                    <label for="timing-input" class="information-key__container-input__label">Таймінг</label>
+                    <input type="text" name="timing-input" id="timing-input" autocomplete="off"
+                        class="information-key__container-input__input">
+                </div>
+                <button class="information-key__button">Copy</button>
             </div>
-            <div class="containter-information-key__container-input">
-                <label for="context-input" class="containter-information-key__container-input__label">Контекст</label>
-                <input type="text" name="context-input" id="context-input" autocomplete="off"
-                    class="containter-information-key__container-input__input">
+            <div class="common-names">
+                <h3>Часто вживані імена</h3>
+                <span class="common-names__code">Код персонажа:
+                    <span class="common-names__characters"></span>
+                </span>
+                <ul class="common-names__list">
+                    <li class="common-names__list__element">
+                        Немає данних про цей код
+                    </li>
+                </ul>
             </div>
-            <div class="containter-information-key__container-input">
-                <label for="timing-input" class="containter-information-key__container-input__label">Таймінг</label>
-                <input type="text" name="timing-input" id="timing-input" autocomplete="off"
-                    class="containter-information-key__container-input__input">
-            </div>
-            <button class="containter-information-key__button">Copy</button>
-        </div>
-
-        <div class="common-names behindScreen-right">
-            <h3>Часто вживані імена</h3>
-            <span class="common-names__code">Код персонажа:
-                <span class="common-names__characters"></span>
-            </span>
-            <ul class="common-names__list">
-                <li class="common-names__list__element">
-                    Немає данних про цей код
-                </li>
-            </ul>
         </div>
     </div>
     <audio id="selectSound" src="audio/select.ogg"></audio>

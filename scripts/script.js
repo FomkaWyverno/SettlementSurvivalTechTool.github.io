@@ -133,7 +133,8 @@ function parseJsonToArrayKeys(json) {
     return array;
 }
 
-const informationKeyBlock = document.querySelector('.containter-information-key');
+const additinalContainer = document.querySelector('.containter-additinal');
+const informationKeyBlock = document.querySelector('.information-key');
 const commonNames = document.querySelector('.common-names');
 const commonNamesCodeCharacter = document.querySelector('.common-names__characters');
 const commonNamesList = document.querySelector('.common-names__list');
@@ -141,7 +142,7 @@ const containerActorInput = document.querySelector('#container-actor-input');
 const actorInput = document.querySelector('#actor-input');
 const contextInput = document.querySelector('#context-input');
 const timingInput = document.querySelector('#timing-input');
-const informationButton = document.querySelector('.containter-information-key__button');
+const informationButton = document.querySelector('.information-key__button');
 let keyTranslate;
 
 informationButton.addEventListener('click', () => {
@@ -150,8 +151,7 @@ informationButton.addEventListener('click', () => {
     const timing = timingInput.value;
 
     keyTranslate.writeToClipboardCopyText(actor, context, timing);
-    informationKeyBlock.classList.add('behindScreen-bottom');
-    commonNames.classList.add('behindScreen-right');
+    additinalContainer.classList.add('behindScreen-bottom');
 
     actorInput.value = '';
 });

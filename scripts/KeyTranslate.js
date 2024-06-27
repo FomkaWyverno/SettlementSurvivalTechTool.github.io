@@ -94,18 +94,17 @@ class KeyTranslate {
                         commonNamesList.appendChild(liElement); 
                     });
                 } else {
-                    commonNamesList.innerHTML = '<li>В словнику не було знайдено!<li/>'
+                    commonNamesList.innerHTML = `<span class="common-names__no-exist">В словнику не було знайдено!<span/>`
                 }
 
                 containerActorInput.classList.remove('hide'); // Відображаємо поле для актора
-                commonNames.classList.remove('behindScreen-right'); // Відкриваємо список часто вживаємих імен для цього коду персонажу
                 commonNamesCodeCharacter.innerHTML = this.characterCode; // Встановлюємо код персонажа
 
                 
             } else { // Якщо немає репліки
                 containerActorInput.classList.add('hide'); // Скриваємо поле для актора
             }
-            informationKeyBlock.classList.remove('behindScreen-bottom');
+            additinalContainer.classList.remove('behindScreen-bottom');
         });
 
         this.html = trTag;
