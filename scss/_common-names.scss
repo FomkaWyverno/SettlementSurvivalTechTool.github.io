@@ -5,6 +5,7 @@
     font-family: "Play", sans-serif;
     padding: 24px 16px 24px 16px;
 
+    border-left: 2px solid $color-border-backrgound;
     max-width: 300px;
     transition: .5s ease;
 
@@ -23,14 +24,14 @@
     }
 
     &__code {
-        margin-bottom: 8px;
+        padding-bottom: 8px;
+        border-bottom: 2px solid $color-border-backrgound;
     }
 
     &__list {
-        border-top: 2px solid $color-border-backrgound;
         flex-grow: 1;
-
-        padding: 8px 4px 8px 4px;
+        margin-top: 8px;
+        padding: 0px 4px 0px 4px;
     }
 
     &__element {
@@ -38,20 +39,58 @@
         justify-content: space-between;
         width: 200px;
 
+        padding: 8px 4px 8px 4px;
+
         &:not(:last-child) {
             margin-bottom: 5px;
         }
+
+        &:not(:first-child) {
+            border-top: 2px solid $color-border-backrgound;
+        }
+
         &__button {
-            color: $color-btn-txt;
-            border: 2px solid $color-btn-txt;
-            border-radius: 4px;
-            background-color: white;
+            position: relative;
+            background-color: transparent;
+            border: none;
+
+            width: 16px;
+            height: 16px;
+
+            &__line {
+                position: absolute;
+                display: block;
+                left: 0;
+                bottom: calc(50% - 2px);
+                ;
+                content: '';
+                width: 16px;
+                height: 4px;
+                border-radius: 2px;
+                background-color: $color-border-backrgound;
+
+                pointer-events: none;
+                transition: .5s ease;
+            }
 
             &:hover {
                 cursor: $cursor_pointer;
-                color: $color-btn-txt-hv;
-                background-image: url(../images/btn2.svg);
             }
+            &:hover &__line {
+                background-color: $color-delete-button-hv;
+            }
+
+            & span:first-child {
+                transform: rotate(-45deg);
+            }
+
+            & span:last-child {
+                transform: rotate(45deg);
+            }
+        }
+        
+        &__text {
+            cursor: $cursor_pointer;
         }
     }
 }

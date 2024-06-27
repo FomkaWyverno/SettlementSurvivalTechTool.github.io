@@ -264,6 +264,7 @@ td {
   border: 2px solid #575757;
   color: white;
   max-width: 600px;
+  transition: 1s ease;
 }
 
 .information-key {
@@ -272,7 +273,6 @@ td {
   align-items: center;
   font-family: "Play", sans-serif;
   padding: 32px 24px 32px 24px;
-  border-right: 2px solid #575757;
   transition: 0.5s ease;
 }
 .information-key__button {
@@ -321,6 +321,7 @@ td {
   align-items: center;
   font-family: "Play", sans-serif;
   padding: 24px 16px 24px 16px;
+  border-left: 2px solid #575757;
   max-width: 300px;
   transition: 0.5s ease;
 }
@@ -336,31 +337,60 @@ td {
   font-weight: 700;
 }
 .common-names__code {
-  margin-bottom: 8px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid #575757;
 }
 .common-names__list {
-  border-top: 2px solid #575757;
   flex-grow: 1;
-  padding: 8px 4px 8px 4px;
+  margin-top: 8px;
+  padding: 0px 4px 0px 4px;
 }
 .common-names__element {
   display: flex;
   justify-content: space-between;
   width: 200px;
+  padding: 8px 4px 8px 4px;
 }
 .common-names__element:not(:last-child) {
   margin-bottom: 5px;
 }
+.common-names__element:not(:first-child) {
+  border-top: 2px solid #575757;
+}
 .common-names__element__button {
-  color: #0057BB;
-  border: 2px solid #0057BB;
-  border-radius: 4px;
-  background-color: white;
+  position: relative;
+  background-color: transparent;
+  border: none;
+  width: 16px;
+  height: 16px;
+}
+.common-names__element__button__line {
+  position: absolute;
+  display: block;
+  left: 0;
+  bottom: calc(50% - 2px);
+  content: "";
+  width: 16px;
+  height: 4px;
+  border-radius: 2px;
+  background-color: #575757;
+  pointer-events: none;
+  transition: 0.5s ease;
 }
 .common-names__element__button:hover {
   cursor: url(../images/pointer.png), auto;
-  color: #e2ecff;
-  background-image: url(../images/btn2.svg);
+}
+.common-names__element__button:hover .common-names__element__button__line {
+  background-color: #d3d3d3;
+}
+.common-names__element__button span:first-child {
+  transform: rotate(-45deg);
+}
+.common-names__element__button span:last-child {
+  transform: rotate(45deg);
+}
+.common-names__element__text {
+  cursor: url(../images/pointer.png), auto;
 }
 
 .container-filter {

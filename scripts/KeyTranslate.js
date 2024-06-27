@@ -17,7 +17,7 @@ class KeyTranslate {
             let groupCharacter = patternVoiceKey.exec(this.key);
             this.characterCode = groupCharacter[1];
         }
-        
+
         if (this.text == null || this.text == undefined) this.text = '';
 
         const trTag = document.createElement('tr');
@@ -49,59 +49,75 @@ class KeyTranslate {
         trTag.appendChild(gameTextTag);
         trTag.appendChild(conteinerButtonTag);
 
-        const selectSound = document.querySelector('#selectSound');
-        const openSound = document.querySelector('#openSound');
-
         buttonTag.addEventListener('mouseover', () => {
             selectSound.currentTime = 0;
             selectSound.play();
         });
 
-        buttonTag.addEventListener('click', () => {
+        buttonTag.addEventListener('click', () => { // Відкриваємо для копіювання цей ключ
             openSound.currentTime = 0;
             openSound.play();
             keyTranslate = this;
-            if (this.hasVoice) { // Якщо є репліка
+            if (this.hasVoice) { // Якщо є репліка, показуємо словник імен
+                commonNames.classList.remove('hide');
                 commonNamesList.innerHTML = '';
 
                 const jsonListCharacters = localStorage.getItem(this.characterCode);
                 if (jsonListCharacters) {
                     const listCharacters = JSON.parse(jsonListCharacters);
-                    listCharacters.forEach(characher => {
-                        const liElement = document.createElement('li');
-                        const textElement = document.createElement('span');
-                        const buttonDeleteElement = document.createElement('button');
+                    console.log('List characters:')
+                    console.log(listCharacters);
+                    if (listCharacters.length > 0) {
+                        listCharacters.forEach(characher => {
+                            const liElement = document.createElement('li');
+                            const textElement = document.createElement('span');
+                            const buttonDeleteElement = document.createElement('button');
 
-                        textElement.innerHTML = characher;
-                        buttonDeleteElement.innerHTML = 'Видалити';
+                            textElement.textContent = characher;
+                            buttonDeleteElement.innerHTML = `
+                                        <span class="common-names__element__button__line"></span>
+                                        <span class="common-names__element__button__line"></span>`;
 
-                        liElement.appendChild(textElement);
-                        liElement.appendChild(buttonDeleteElement);
+                            liElement.appendChild(textElement);
+                            liElement.appendChild(buttonDeleteElement);
 
-                        liElement.classList.add('common-names__element');
-                        textElement.classList.add('common-names__element__text');
-                        buttonDeleteElement.classList.add('common-names__element__button');
+                            liElement.classList.add('common-names__element');
+                            textElement.classList.add('common-names__element__text');
+                            buttonDeleteElement.classList.add('common-names__element__button');
 
-                        buttonDeleteElement.addEventListener('mouseover', () => {
-                            selectSound.currentTime = 0;
-                            selectSound.play();
+                            buttonDeleteElement.addEventListener('click', () => {
+                                openSound.currentTime = 0;
+                                openSound.play();
+                                const listCharacters = JSON.parse(localStorage.getItem(this.characterCode)); // Беремо поточний список
+                                const indexCharacter = listCharacters.indexOf(characher);
+                                console.log(`Delete from list character ${characher}`);
+                                listCharacters.splice(indexCharacter, 1);
+                                localStorage.setItem(this.characterCode, JSON.stringify(listCharacters));
+                                commonNamesList.removeChild(liElement);
+                                if (listCharacters.length == 0) {
+                                    commonNamesNoExist();
+                                }
+                            });
+
+                            commonNamesList.appendChild(liElement);
                         });
-                        buttonDeleteElement.addEventListener('click', () => {
-                            openSound.currentTime = 0;
-                            openSound.play();
-                        }) 
-                        
-                        commonNamesList.appendChild(liElement); 
-                    });
+                    } else {
+                        commonNamesNoExist();
+                    }
+
                 } else {
-                    commonNamesList.innerHTML = `<span class="common-names__no-exist">В словнику не було знайдено!<span/>`
+                    commonNamesNoExist();
                 }
 
+                function commonNamesNoExist() {
+                    commonNamesList.innerHTML = `<span class="common-names__no-exist">Словник порожній!</span>`;
+                }
                 containerActorInput.classList.remove('hide'); // Відображаємо поле для актора
                 commonNamesCodeCharacter.innerHTML = this.characterCode; // Встановлюємо код персонажа
 
-                
+
             } else { // Якщо немає репліки
+                commonNames.classList.add('hide'); // Ховаємо словник імен
                 containerActorInput.classList.add('hide'); // Скриваємо поле для актора
             }
             additinalContainer.classList.remove('behindScreen-bottom');
@@ -209,17 +225,19 @@ class KeyTranslate {
 
 
         function saveCharacterNameInLocalStorage(actorRole, characterCode) {
-            const jsonListCharacters = localStorage.getItem(characterCode);
-            let listCharacters;
-            if (jsonListCharacters) {
-                listCharacters = JSON.parse(jsonListCharacters);
-            } else {
-                listCharacters = [];
+            if (actorRole && actorRole != '') {
+                const jsonListCharacters = localStorage.getItem(characterCode);
+                let listCharacters;
+                if (jsonListCharacters) {
+                    listCharacters = JSON.parse(jsonListCharacters);
+                } else {
+                    listCharacters = [];
+                }
+
+                listCharacters.push(actorRole);
+
+                localStorage.setItem(characterCode, JSON.stringify(listCharacters));
             }
-
-            listCharacters.push(actorRole);
-
-            localStorage.setItem(characterCode, JSON.stringify(listCharacters));
         }
     }
 
@@ -241,7 +259,7 @@ class KeyTranslate {
             "\n": "\\n",
             "\r": "\\r"
         };
-        
-        return text.replace(/[\r\n]/g, function(match) { return metasymbols[match]; });
+
+        return text.replace(/[\r\n]/g, function (match) { return metasymbols[match]; });
     }
 }

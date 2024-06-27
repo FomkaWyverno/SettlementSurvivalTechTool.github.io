@@ -143,16 +143,25 @@ const actorInput = document.querySelector('#actor-input');
 const contextInput = document.querySelector('#context-input');
 const timingInput = document.querySelector('#timing-input');
 const informationButton = document.querySelector('.information-key__button');
+const selectSound = document.querySelector('#selectSound');
+const openSound = document.querySelector('#openSound');
 let keyTranslate;
 
+informationButton.addEventListener('mouseover', () => {
+    selectSound.currentTime = 0;
+    selectSound.play();
+});
+
 informationButton.addEventListener('click', () => {
+    openSound.currentTime = 0;
+    openSound.play();
+
     let actor = actorInput.value;
     let context = contextInput.value;
     const timing = timingInput.value;
 
     keyTranslate.writeToClipboardCopyText(actor, context, timing);
     additinalContainer.classList.add('behindScreen-bottom');
-
     actorInput.value = '';
 });
 
