@@ -233,10 +233,12 @@ class KeyTranslate {
                 } else {
                     listCharacters = [];
                 }
+                if (!listCharacters.includes(actorRole)) { // Якщо такого актора немає
+                    listCharacters.push(actorRole);
+                    localStorage.setItem(characterCode, JSON.stringify(listCharacters));
+                }
 
-                listCharacters.push(actorRole);
-
-                localStorage.setItem(characterCode, JSON.stringify(listCharacters));
+                
             }
         }
     }
