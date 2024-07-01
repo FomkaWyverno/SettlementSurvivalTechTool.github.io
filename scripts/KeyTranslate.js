@@ -71,19 +71,35 @@ class KeyTranslate {
                         listCharacters.forEach(characher => {
                             const liElement = document.createElement('li');
                             const textElement = document.createElement('span');
+                            const buttonsBoxElement = document.createElement('div');
                             const buttonDeleteElement = document.createElement('button');
+                            const buttonInsertActor = document.createElement('button');
 
                             textElement.textContent = characher;
                             buttonDeleteElement.innerHTML = `
-                                        <span class="common-names__element__button__line"></span>
-                                        <span class="common-names__element__button__line"></span>`;
+                                        <span class="common-names__element__buttons-box__button-delete__line"></span>
+                                        <span class="common-names__element__buttons-box__button-delete__line"></span>`;
+
+                            buttonInsertActor.innerHTML = `
+                                        <span class="common-names__element__buttons-box__button-insert__icon">
+                                            <span class="common-names__element__buttons-box__button-insert__icon__arrow">
+                                                <span class="common-names__element__buttons-box__button-insert__icon__arrow--left common-names__element__buttons-box__button-insert__icon__visual"></span>
+                                                <span class="common-names__element__buttons-box__button-insert__icon__arrow--right common-names__element__buttons-box__button-insert__icon__visual"></span>
+                                            </span>
+                                            <span class="common-names__element__buttons-box__button-insert__icon__line common-names__element__buttons-box__button-insert__icon__visual"></span>
+                                        </span>`
+
+                            buttonsBoxElement.appendChild(buttonInsertActor);
+                            buttonsBoxElement.appendChild(buttonDeleteElement);
 
                             liElement.appendChild(textElement);
-                            liElement.appendChild(buttonDeleteElement);
+                            liElement.appendChild(buttonsBoxElement);
 
                             liElement.classList.add('common-names__element');
                             textElement.classList.add('common-names__element__text');
-                            buttonDeleteElement.classList.add('common-names__element__button');
+                            buttonsBoxElement.classList.add('common-names__element__buttons-box')
+                            buttonDeleteElement.classList.add('common-names__element__buttons-box__button', 'common-names__element__buttons-box__button-delete');
+                            buttonInsertActor.classList.add('common-names__element__buttons-box__button', 'common-names__element__buttons-box__button-insert');
 
                             buttonDeleteElement.addEventListener('click', () => {
                                 openSound.currentTime = 0;
@@ -98,6 +114,10 @@ class KeyTranslate {
                                     commonNamesNoExist();
                                 }
                             });
+
+                            buttonInsertActor.addEventListener('click', () => {
+                                actorInput.value = characher;
+                            })
 
                             commonNamesList.appendChild(liElement);
                         });

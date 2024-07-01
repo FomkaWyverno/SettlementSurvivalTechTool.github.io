@@ -320,7 +320,7 @@ td {
   flex-direction: column;
   align-items: center;
   font-family: "Play", sans-serif;
-  padding: 24px 16px 24px 16px;
+  padding: 32px 24px 32px 24px;
   border-left: 2px solid #575757;
   max-width: 300px;
   transition: 0.5s ease;
@@ -357,14 +357,14 @@ td {
 .common-names__element:not(:first-child) {
   border-top: 2px solid #575757;
 }
-.common-names__element__button {
+.common-names__element__buttons-box__button {
   position: relative;
   background-color: transparent;
   border: none;
   width: 16px;
   height: 16px;
 }
-.common-names__element__button__line {
+.common-names__element__buttons-box__button-delete__line {
   position: absolute;
   display: block;
   left: 0;
@@ -377,22 +377,99 @@ td {
   pointer-events: none;
   transition: 0.5s ease;
 }
-.common-names__element__button:hover {
+.common-names__element__buttons-box__button-delete:hover {
   cursor: url(../images/pointer.png), auto;
 }
-.common-names__element__button:hover .common-names__element__button__line {
+.common-names__element__buttons-box__button-delete:hover .common-names__element__buttons-box__button-delete__line {
   background-color: #d3d3d3;
 }
-.common-names__element__button span:first-child {
+.common-names__element__buttons-box__button-delete:hover .common-names__element__buttons-box__button-delete__line:first-child {
+  transform: rotate(45deg);
+}
+.common-names__element__buttons-box__button-delete:hover .common-names__element__buttons-box__button-delete__line:last-child {
   transform: rotate(-45deg);
 }
-.common-names__element__button span:last-child {
+.common-names__element__buttons-box__button-delete__line:first-child {
+  transform: rotate(-45deg);
+}
+.common-names__element__buttons-box__button-delete__line:last-child {
   transform: rotate(45deg);
+}
+.common-names__element__buttons-box__button-insert {
+  width: 24px;
+  height: 16px;
+  padding: 0;
+  margin-right: 4px;
+}
+.common-names__element__buttons-box__button-insert__icon {
+  display: block;
+  content: "";
+  position: relative;
+  width: 24px;
+  height: 16px;
+  left: 0;
+  top: 0;
+  transition: 0.5s;
+  pointer-events: none;
+}
+.common-names__element__buttons-box__button-insert__icon__visual {
+  display: block;
+  position: absolute;
+  content: "";
+  background-color: #575757;
+  transition: 0.5s;
+  pointer-events: none;
+}
+.common-names__element__buttons-box__button-insert__icon__line {
+  width: 16px;
+  height: 4px;
+  left: 2px;
+  top: calc(50% - 2px);
+}
+.common-names__element__buttons-box__button-insert__icon__arrow {
+  position: relative;
+  display: block;
+  height: 12px;
+  width: 12px;
+  left: 2px;
+  top: calc(50% - 6px);
+  transform: rotate(-45deg);
+}
+.common-names__element__buttons-box__button-insert__icon__arrow--right {
+  width: 12px;
+  height: 4px;
+}
+.common-names__element__buttons-box__button-insert__icon__arrow--left {
+  width: 12px;
+  height: 4px;
+  transform: rotate(90deg);
+  right: calc(50% - 2px);
+  top: calc(50% - 2px);
+}
+.common-names__element__buttons-box__button-insert:hover {
+  cursor: url(../images/pointer.png), auto;
+}
+.common-names__element__buttons-box__button-insert:hover .common-names__element__buttons-box__button-insert__icon {
+  animation: animation-insert-button 0.4s 3;
+}
+.common-names__element__buttons-box__button-insert:hover .common-names__element__buttons-box__button-insert__icon__visual {
+  background-color: #d3d3d3;
 }
 .common-names__element__text {
   cursor: url(../images/pointer.png), auto;
 }
 
+@keyframes animation-insert-button {
+  0% {
+    transform: scale(100%);
+  }
+  50% {
+    transform: scale(125%);
+  }
+  100% {
+    transform: scale(100%);
+  }
+}
 .container-filter {
   position: relative;
   display: flex;
