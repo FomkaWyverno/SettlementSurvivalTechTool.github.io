@@ -216,6 +216,7 @@ td {
 .table-json__game-text {
   width: 900px;
   max-width: 900px;
+  white-space: pre-wrap;
 }
 .table-json .table-json__container-btn {
   border: none;

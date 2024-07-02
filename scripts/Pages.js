@@ -67,6 +67,6 @@ class Pages {
             const page = this.pages[this.numberPage - 1];
             page.forEach(element => this.tableBody.appendChild(element.html));
         }
-        this.spanPage.innerHTML = `${this.numberPage} of ${this.pages.length}`;
+        this.spanPage.innerHTML = `${this.numberPage} of ${this.pages.length > 0 ? this.pages.length : 1}`;
     }
 }

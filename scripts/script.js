@@ -108,13 +108,13 @@ function runPagesFilter() {
         console.log(`InputFilter: ${input}`);
         pages.filter((key) => { // Фільтрувати рядки
             if (filterStart.checked) { // Фільтрувати якщо текст починається з
-                return key[compare].toLowerCase().startsWith(input); // key[compare] - викликає  
+                return key[compare].toLowerCase().startsWith(input.toLowerCase()); // key[compare] - викликає  
             } else if (filterEnd.checked) { // Фільтрувати за текстом який закінчується
-                return key[compare].toLowerCase().endsWith(input);
+                return key[compare].toLowerCase().endsWith(input.toLowerCase());
             } else if (filterEquals.checked) { // Фільтрувати якщо текст однаковий
-                return key[compare].toLowerCase() === input;
+                return key[compare].toLowerCase() === input.toLowerCase();
             } else { // Фільтрувати якщо текст має текст в середині
-                return key[compare].toLowerCase().includes(input);
+                return key[compare].toLowerCase().includes(input.toLowerCase());
             }
 
         });
