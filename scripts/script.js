@@ -5,10 +5,6 @@ const tableBody = document.querySelector('.table-json tbody');
 
 console.log(keyJSON);
 let keys = parseJsonToArrayKeys(keyJSON);
-keys = keys.filter(key => {
-    if (key.text.length == 0 || key.text == '{S}') return false;
-    return true;
-});
 
 console.log('Load JSON')
 loaderBlock.classList.add('hide');
@@ -17,15 +13,15 @@ searchBlock.classList.remove('hide');
 const nextButton = document.querySelector('.container-search__container-input__previousPage');
 const previousButton = document.querySelector('.container-search__container-input__nextPage');
 const spanPage = document.querySelector('.container-search__container-input__counter__page');
-const inputFilter = document.querySelector('#detroit-text');
+const inputFilter = document.querySelector('#filter-text');
 const buttonFilter = document.querySelector('.container-filter__button');
 const contentFilter = document.querySelector('.container-filter__content');
 const filterSelects = document.querySelectorAll('.container-filter__content__select__label');
 const filterInputs = document.querySelectorAll('.container-filter__content__select__radio');
 
 const tableHeadCode = document.querySelector('#table-json__head--code');
+const tableHeadID = document.querySelector('#table-json__head--id');
 const tableHeadText = document.querySelector('#table-json__head--text');
-const tableHeadKey = document.querySelector('#table-json__head--key');
 
 const filterContains = document.querySelector('#filter-contains');
 const filterStart = document.querySelector('#filter-start');
@@ -64,26 +60,26 @@ filterInputs.forEach(input => { input.addEventListener('change', () => { runPage
 tableHeadCode.addEventListener('click', () => {
     if (!tableHeadCode.classList.contains('table-json__head__select')) {
         tableHeadCode.classList.add('table-json__head__select');
-        tableHeadKey.classList.remove('table-json__head__select');
         tableHeadText.classList.remove('table-json__head__select');
+        tableHeadID.classList.remove('table-json__head__select');
         runPagesFilter();
     }
 });
 
-tableHeadKey.addEventListener('click', () => {
-    if (!tableHeadKey.classList.contains('table-json__head__select')) {
-        tableHeadKey.classList.add('table-json__head__select');
-        tableHeadText.classList.remove('table-json__head__select');
-        tableHeadCode.classList.remove('table-json__head__select');
-        runPagesFilter();
-    }
-});
 tableHeadText.addEventListener('click', () => {
     if (!tableHeadText.classList.contains('table-json__head__select')) {
         tableHeadText.classList.add('table-json__head__select');
-        tableHeadKey.classList.remove('table-json__head__select');
         tableHeadCode.classList.remove('table-json__head__select');
+        tableHeadID.classList.remove('table-json__head__select');
         runPagesFilter();
+    }
+});
+
+tableHeadID.addEventListener('click', () => {
+    if (!tableHeadID.classList.contains('table-json__head__select')) {
+        tableHeadID.classList.add('table-json__head__select');
+        tableHeadText.classList.remove('table-json__head__select');
+        tableHeadCode.classList.remove('table-json__head__select');
     }
 });
 
@@ -94,8 +90,8 @@ function runPagesFilter() {
     if (tableHeadText.classList.contains('table-json__head__select')) {
         compare = 'text';
         hasValue = true;
-    } else if (tableHeadKey.classList.contains('table-json__head__select')) {
-        compare = 'key';
+    } else if (tableHeadID.classList.contains('table-json__head__select')) {
+        compare = 'id';
         hasValue = true;
     } else if (tableHeadCode.classList.contains('table-json__head__select')) {
         compare = 'code';
@@ -125,9 +121,8 @@ function runPagesFilter() {
 function parseJsonToArrayKeys(json) {
     const array = new Array();
     Object.keys(json).forEach((id) => {
-        Object.keys(json[id]).forEach((key) => {
-            array.push(new KeyTranslate(id, key, json[id][key].text, json[id][key].hasLink && json[id][key].linkExists));
-        });
+        console.log(`id: ${id}, json[id]=${json[id]}`)
+        array.push(new KeyTranslate(id, json[id]));
     });
 
     return array;
@@ -135,34 +130,19 @@ function parseJsonToArrayKeys(json) {
 
 const additinalContainer = document.querySelector('.containter-additinal');
 const informationKeyBlock = document.querySelector('.information-key');
-const commonNames = document.querySelector('.common-names');
-const commonNamesCodeCharacter = document.querySelector('.common-names__characters');
-const commonNamesList = document.querySelector('.common-names__list');
-const containerActorInput = document.querySelector('#container-actor-input');
-const actorInput = document.querySelector('#actor-input');
 const contextInput = document.querySelector('#context-input');
 const timingInput = document.querySelector('#timing-input');
 const informationButton = document.querySelector('.information-key__button');
-const selectSound = document.querySelector('#selectSound');
-const openSound = document.querySelector('#openSound');
 let keyTranslate;
 
-informationButton.addEventListener('mouseover', () => {
-    selectSound.currentTime = 0;
-    selectSound.play();
-});
 
 informationButton.addEventListener('click', () => {
-    openSound.currentTime = 0;
-    openSound.play();
 
-    let actor = actorInput.value;
     let context = contextInput.value;
     const timing = timingInput.value;
 
-    keyTranslate.writeToClipboardCopyText(actor, context, timing);
+    keyTranslate.writeToClipboardCopyText(context, timing);
     additinalContainer.classList.add('behindScreen-bottom');
-    actorInput.value = '';
 });
 
 contextInput.addEventListener('input', () => {
